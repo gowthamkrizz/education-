@@ -420,8 +420,21 @@ body.menu-open { position: fixed; width: 100%; overflow-y: scroll; }
 .hero-visual { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 280px; z-index: 1; animation: slideInFromRight 0.8s ease-out; }
 .hero-card { background: rgba(30,26,58,0.8); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; text-align: center; animation: float3d 4s ease-in-out infinite; }
 
-/* STATS BAR */
-.stats-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: center; width: 100%; }
+/* STATS BAR SECTION with heading */
+.stats-section {
+    padding: 0 5% 0.5rem;
+    width: 100%;
+    background: var(--surface);
+}
+.stats-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
 .stat-item { flex: 1; min-width: 120px; text-align: center; padding: 1.5rem 0.5rem; position: relative; transition: transform 0.3s; }
 .stat-item:hover { transform: translateY(-3px); }
 .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); height: 30px; width: 1px; background: var(--border); }
@@ -434,8 +447,23 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
 .sec-title { font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; color: var(--ivory); }
 
+/* Topic description under each section heading */
+.sec-topic {
+    font-size: 0.8rem;
+    color: var(--text2);
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.5;
+    text-align: center;
+}
+.stats-section .sec-topic,
+.cta-section .sec-topic {
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
 /* GRIDS */
-.courses-grid, .subjects-grid, .instructors-grid, .testimonial-grid, .gallery-grid, .achievement-grid, .feature-grid {
+.courses-grid, .subjects-grid, .instructors-grid, .testimonial-grid, .gallery-grid, .achievement-grid, .feature-grid, .events-grid, .corporate-grid {
     display: grid;
     gap: 1.2rem;
     margin-top: 1.5rem;
@@ -448,9 +476,11 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .gallery-grid { grid-template-columns: repeat(4, 1fr); }
 .achievement-grid { grid-template-columns: repeat(4, 1fr); }
 .feature-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.events-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.corporate-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 
 /* CARDS */
-.course-card, .subject-card, .instructor-card, .testimonial-card, .gallery-item, .achievement-card, .feature-card {
+.course-card, .subject-card, .instructor-card, .testimonial-card, .gallery-item, .achievement-card, .feature-card, .event-card, .corporate-card {
     background: var(--surface);
     border: 1px solid var(--border2);
     border-radius: 16px;
@@ -459,7 +489,7 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
     cursor: pointer;
     transform-style: preserve-3d;
 }
-.glow-card:hover, .course-card:hover, .subject-card:hover, .instructor-card:hover, .testimonial-card:hover, .gallery-item:hover, .achievement-card:hover, .feature-card:hover {
+.glow-card:hover, .course-card:hover, .subject-card:hover, .instructor-card:hover, .testimonial-card:hover, .gallery-item:hover, .achievement-card:hover, .feature-card:hover, .event-card:hover, .corporate-card:hover {
     transform: translateY(-12px) rotateX(5deg) rotateY(5deg) scale(1.02);
     border-color: var(--primary);
     box-shadow: 0 30px 50px -20px rgba(0,0,0,0.6);
@@ -480,6 +510,18 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .feature-card { text-align: center; padding: 1.8rem; }
 .feature-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; transition: transform 0.3s; }
 .feature-card:hover i { transform: scale(1.1); }
+
+/* Event Card Styles */
+.event-card { padding: 1.2rem; text-align: left; }
+.event-date { font-size: 0.65rem; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.event-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.event-desc { font-size: 0.75rem; color: var(--text2); margin-bottom: 1rem; }
+.event-time { font-size: 0.7rem; color: var(--primary3); display: flex; align-items: center; gap: 6px; }
+
+/* Corporate Card Styles */
+.corporate-card { padding: 1.5rem; text-align: center; }
+.corporate-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; transition: transform 0.3s; }
+.corporate-card:hover i { transform: scale(1.1); }
 
 /* GALLERY - SMOOTH & LAG-FREE (no continuous floating, only clean entrance) */
 .gallery-item {
@@ -572,6 +614,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     .hero-actions { justify-content: center; }
     .sec-label { justify-content: center; }
     .sec-title { text-align: center; }
+    .sec-topic { text-align: center; }
     .hero-orb3 { display: none; }
 }
 @media (max-width: 768px) {
@@ -586,7 +629,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     .ft-brand { align-items: center; text-align: center; }
     .ft-socials { justify-content: center; }
     .ft-brand p { margin-left: auto; margin-right: auto; }
-    .courses-grid, .subjects-grid, .instructors-grid, .testimonial-grid, .feature-grid { grid-template-columns: 1fr; }
+    .courses-grid, .subjects-grid, .instructors-grid, .testimonial-grid, .feature-grid, .events-grid, .corporate-grid { grid-template-columns: 1fr; }
     .hero { padding: 70px 5% 40px; min-height: 70vh; }
     .gallery-overlay h3 { font-size: 0.9rem; }
     .gallery-overlay p { font-size: 0.65rem; }
@@ -666,30 +709,53 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     <div class="hero-visual"><div class="hero-card"><i class="fas fa-laptop-code"></i><h3>Learn Anywhere</h3><p>Mobile, desktop, offline</p></div></div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar"><div class="stat-item sr"><span class="stat-num" data-count="2500000">2.5M+</span><span class="stat-label">Active Learners</span></div><div class="stat-item sr d1"><span class="stat-num" data-count="98">98%</span><span class="stat-label">Completion Rate</span></div><div class="stat-item sr d2"><span class="stat-num" data-count="5000">5000+</span><span class="stat-label">Expert Courses</span></div><div class="stat-item sr d3"><span class="stat-num">24/7</span><span class="stat-label">Mentor Support</span></div></div>
+<!-- STATS BAR SECTION WITH HEADING AND TOPIC -->
+<div class="stats-section">
+    <div class="sec-label sr" style="justify-content: center;">Trust & Excellence</div>
+    <h2 class="sec-title sr" style="text-align: center;">Our <span style="color:var(--accent)">Impact</span> in Numbers</h2>
+    <div class="sec-topic sr">Real results from a global community — proof that learning transforms lives.</div>
+    <div class="stats-bar">
+        <div class="stat-item sr"><span class="stat-num" data-count="2500000">2.5M+</span><span class="stat-label">Active Learners</span></div>
+        <div class="stat-item sr d1"><span class="stat-num" data-count="98">98%</span><span class="stat-label">Completion Rate</span></div>
+        <div class="stat-item sr d2"><span class="stat-num" data-count="5000">5000+</span><span class="stat-label">Expert Courses</span></div>
+        <div class="stat-item sr d3"><span class="stat-num">24/7</span><span class="stat-label">Mentor Support</span></div>
+    </div>
+</div>
 
 <!-- SUBJECTS -->
-<section class="sec"><div class="sec-label sr">Learning Domains</div><h2 class="sec-title sr">Master <span style="color:var(--accent)">High-Impact</span> Skills</h2>
-<div class="subjects-grid"><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-chart-line"></i><h3>Data Science & AI</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-code"></i><h3>Full-Stack Dev</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-paintbrush"></i><h3>UI/UX Design</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-bullhorn"></i><h3>Digital Marketing</h3></div></div></section>
+<section class="sec">
+    <div class="sec-label sr">Learning Domains</div>
+    <h2 class="sec-title sr">Master <span style="color:var(--accent)">High-Impact</span> Skills</h2>
+    <div class="sec-topic sr">Explore our curated learning paths across cutting-edge fields — from AI to digital marketing.</div>
+    <div class="subjects-grid"><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-chart-line"></i><h3>Data Science & AI</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-code"></i><h3>Full-Stack Dev</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-paintbrush"></i><h3>UI/UX Design</h3></div><div class="subject-card glow-card" onclick="show404()"><i class="fas fa-bullhorn"></i><h3>Digital Marketing</h3></div></div>
+</section>
 
 <!-- FEATURED COURSES -->
-<section class="sec" style="background:var(--bg2)"><div class="sec-label sr">Featured Programs</div><h2 class="sec-title sr">Most Popular <span style="color:var(--accent)">Courses</span></h2>
-<div class="courses-grid"><div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fab fa-python"></i></div><div class="course-info"><div class="course-cat">Data Science</div><div class="course-title">Python for AI & ML</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.9</span><span>₹2,499</span></div></div></div>
-<div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fab fa-react"></i></div><div class="course-info"><div class="course-cat">Web Dev</div><div class="course-title">React & Node.js</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.8</span><span>₹1,999</span></div></div></div>
-<div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fas fa-figma"></i></div><div class="course-info"><div class="course-cat">Design</div><div class="course-title">UX Research & Design</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.7</span><span>₹1,599</span></div></div></div></div></section>
+<section class="sec" style="background:var(--bg2)">
+    <div class="sec-label sr">Featured Programs</div>
+    <h2 class="sec-title sr">Most Popular <span style="color:var(--accent)">Courses</span></h2>
+    <div class="sec-topic sr">Hands‑on, project‑based courses taught by industry experts — learn by doing.</div>
+    <div class="courses-grid"><div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fab fa-python"></i></div><div class="course-info"><div class="course-cat">Data Science</div><div class="course-title">Python for AI & ML</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.9</span><span>₹2,499</span></div></div></div>
+    <div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fab fa-react"></i></div><div class="course-info"><div class="course-cat">Web Dev</div><div class="course-title">React & Node.js</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.8</span><span>₹1,999</span></div></div></div>
+    <div class="course-card glow-card" onclick="show404()"><div class="course-img"><i class="fas fa-figma"></i></div><div class="course-info"><div class="course-cat">Design</div><div class="course-title">UX Research & Design</div><div style="display:flex;justify-content:space-between;margin-top:0.8rem"><span>⭐ 4.7</span><span>₹1,599</span></div></div></div></div>
+</section>
 
 <!-- WHY STACKLY -->
-<section class="sec"><div class="sec-label sr">Why Choose Stackly</div><h2 class="sec-title sr">The <span style="color:var(--accent)">Smarter</span> Way to Learn</h2>
-<div class="feature-grid"><div class="feature-card glow-card" onclick="show404()"><i class="fas fa-robot"></i><h3>AI-Powered Learning</h3></div>
-<div class="feature-card glow-card" onclick="show404()"><i class="fas fa-certificate"></i><h3>Industry Certification</h3></div>
-<div class="feature-card glow-card" onclick="show404()"><i class="fas fa-chalkboard-user"></i><h3>Live Mentorship</h3></div>
-<div class="feature-card glow-card" onclick="show404()"><i class="fas fa-download"></i><h3>Offline Access</h3></div></div></section>
+<section class="sec">
+    <div class="sec-label sr">Why Choose Stackly</div>
+    <h2 class="sec-title sr">The <span style="color:var(--accent)">Smarter</span> Way to Learn</h2>
+    <div class="sec-topic sr">Personalized learning paths, real‑time support, and career‑focused curriculum.</div>
+    <div class="feature-grid"><div class="feature-card glow-card" onclick="show404()"><i class="fas fa-robot"></i><h3>AI-Powered Learning</h3></div>
+    <div class="feature-card glow-card" onclick="show404()"><i class="fas fa-certificate"></i><h3>Industry Certification</h3></div>
+    <div class="feature-card glow-card" onclick="show404()"><i class="fas fa-chalkboard-user"></i><h3>Live Mentorship</h3></div>
+    <div class="feature-card glow-card" onclick="show404()"><i class="fas fa-download"></i><h3>Offline Access</h3></div></div>
+</section>
 
 <!-- IMMERSIVE EDUCATION ENVIRONMENT - SMOOTH GALLERY -->
 <div class="gallery-section" style="background:var(--bg3);">
     <div class="sec-label sr">Learning Experience</div>
     <h2 class="sec-title sr">Immersive <span style="color:var(--accent)">Education</span> Environment</h2>
+    <div class="sec-topic sr">Interactive video, hands‑on labs, and community forums — learn the way that fits you.</div>
     <div class="gallery-grid">
         <div class="gallery-item" onclick="show404()"><img src=".//img/images%20(1).webp" alt="Online Learning" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-laptop-code"></i><h3>Online Learning</h3><p>5000+ courses</p></div></div>
         <div class="gallery-item" onclick="show404()"><img src=".//img/free_online_class.jpeg.webp" alt="Community" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-users"></i><h3>Community</h3><p>2.5M+ learners</p></div></div>
@@ -699,24 +765,98 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 </div>
 
 <!-- INSTRUCTORS -->
-<section class="sec"><div class="sec-label sr">Expert Mentors</div><h2 class="sec-title sr">Learn From <span style="color:var(--accent)">Industry Leaders</span></h2>
-<div class="instructors-grid"><div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-user-tie"></i></div><h3>Dr. Priya Sharma</h3><p>AI Expert</p></div>
-<div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-laptop-code"></i></div><h3>Marcus Chen</h3><p>Ex-Meta</p></div>
-<div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-palette"></i></div><h3>Elena Vasquez</h3><p>Design Lead</p></div>
-<div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-chart-line"></i></div><h3>Rajiv Mehta</h3><p>Data Scientist</p></div></div></section>
+<section class="sec">
+    <div class="sec-label sr">Expert Mentors</div>
+    <h2 class="sec-title sr">Learn From <span style="color:var(--accent)">Industry Leaders</span></h2>
+    <div class="sec-topic sr">World‑class instructors from Google, Meta, and top design agencies — direct mentorship.</div>
+    <div class="instructors-grid"><div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-user-tie"></i></div><h3>Dr. Priya Sharma</h3><p>AI Expert</p></div>
+    <div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-laptop-code"></i></div><h3>Marcus Chen</h3><p>Ex-Meta</p></div>
+    <div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-palette"></i></div><h3>Elena Vasquez</h3><p>Design Lead</p></div>
+    <div class="instructor-card glow-card" onclick="show404()"><div class="instructor-avatar"><i class="fas fa-chart-line"></i></div><h3>Rajiv Mehta</h3><p>Data Scientist</p></div></div>
+</section>
 
 <!-- TESTIMONIALS -->
-<section class="sec" style="background:var(--bg2)"><div class="sec-label sr">Student Stories</div><h2 class="sec-title sr">What Our <span style="color:var(--accent)">Learners</span> Say</h2>
-<div class="testimonial-grid"><div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"Stackly helped me transition to a Senior Analyst role!"</p><h4>— Anita K.</h4></div>
-<div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"After the bootcamp, I launched my own startup!"</p><h4>— Rohan V.</h4></div>
-<div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"The UI/UX course landed me a job within 2 months!"</p><h4>— Sneha I.</h4></div></div></section>
+<section class="sec" style="background:var(--bg2)">
+    <div class="sec-label sr">Student Stories</div>
+    <h2 class="sec-title sr">What Our <span style="color:var(--accent)">Learners</span> Say</h2>
+    <div class="sec-topic sr">Thousands of career transformations — read real success stories from our alumni.</div>
+    <div class="testimonial-grid"><div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"Stackly helped me transition to a Senior Analyst role!"</p><h4>— Anita K.</h4></div>
+    <div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"After the bootcamp, I launched my own startup!"</p><h4>— Rohan V.</h4></div>
+    <div class="testimonial-card glow-card" onclick="show404()"><i class="fas fa-quote-left" style="color:var(--accent)"></i><p>"The UI/UX course landed me a job within 2 months!"</p><h4>— Sneha I.</h4></div></div>
+</section>
 
 <!-- ACHIEVEMENTS -->
-<section class="sec"><div class="sec-label sr">Our Achievements</div><h2 class="sec-title sr">What We've <span style="color:var(--accent)">Accomplished</span></h2>
-<div class="achievement-grid"><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-trophy"></i><h3>500+</h3><p>Awards</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-graduation-cap"></i><h3>2.5M+</h3><p>Students</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-chalkboard"></i><h3>10K+</h3><p>Live Sessions</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-globe"></i><h3>150+</h3><p>Countries</p></div></div></section>
+<section class="sec">
+    <div class="sec-label sr">Our Achievements</div>
+    <h2 class="sec-title sr">What We've <span style="color:var(--accent)">Accomplished</span></h2>
+    <div class="sec-topic sr">Recognition from global institutions and the love of millions of learners.</div>
+    <div class="achievement-grid"><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-trophy"></i><h3>500+</h3><p>Awards</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-graduation-cap"></i><h3>2.5M+</h3><p>Students</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-chalkboard"></i><h3>10K+</h3><p>Live Sessions</p></div><div class="achievement-card glow-card" onclick="show404()"><i class="fas fa-globe"></i><h3>150+</h3><p>Countries</p></div></div>
+</section>
+
+<!-- UPCOMING EVENTS -->
+<section class="sec" style="background:var(--bg2);">
+    <div class="sec-label sr">Stay Ahead</div>
+    <h2 class="sec-title sr">Upcoming <span style="color:var(--accent)">Live Events</span> & Webinars</h2>
+    <div class="sec-topic sr">Free interactive sessions with industry leaders — reserve your seat today.</div>
+    <div class="events-grid">
+        <div class="event-card glow-card" onclick="show404()">
+            <div class="event-date"><i class="far fa-calendar-alt"></i> March 25, 2026</div>
+            <div class="event-title">AI Revolution in 2026</div>
+            <div class="event-desc">Join industry experts as they explore the latest breakthroughs in generative AI and machine learning.</div>
+            <div class="event-time"><i class="far fa-clock"></i> 10:00 AM EST • Free Registration</div>
+        </div>
+        <div class="event-card glow-card" onclick="show404()">
+            <div class="event-date"><i class="far fa-calendar-alt"></i> April 5, 2026</div>
+            <div class="event-title">Full-Stack Masterclass: MERN</div>
+            <div class="event-desc">Build production-ready applications with MongoDB, Express, React, and Node.js in this hands-on workshop.</div>
+            <div class="event-time"><i class="far fa-clock"></i> 2:00 PM IST • Limited Seats</div>
+        </div>
+        <div class="event-card glow-card" onclick="show404()">
+            <div class="event-date"><i class="far fa-calendar-alt"></i> April 12, 2026</div>
+            <div class="event-title">UX/UI Portfolio Review</div>
+            <div class="event-desc">Get expert feedback on your design portfolio and learn what top companies are looking for.</div>
+            <div class="event-time"><i class="far fa-clock"></i> 4:00 PM GMT • Interactive Session</div>
+        </div>
+    </div>
+</section>
+
+<!-- CORPORATE SOLUTIONS -->
+<section class="sec">
+    <div class="sec-label sr">For Organizations</div>
+    <h2 class="sec-title sr">Corporate <span style="color:var(--accent)">Training</span> Solutions</h2>
+    <div class="sec-topic sr">Scale your team’s skills with custom learning plans, analytics, and enterprise support.</div>
+    <div class="corporate-grid">
+        <div class="corporate-card glow-card" onclick="show404()">
+            <i class="fas fa-building"></i>
+            <h3>Team Upskilling</h3>
+            <p style="font-size:0.75rem; color:var(--text2); margin-top:0.5rem;">Custom learning paths for your entire organization.</p>
+        </div>
+        <div class="corporate-card glow-card" onclick="show404()">
+            <i class="fas fa-chart-simple"></i>
+            <h3>Analytics Dashboard</h3>
+            <p style="font-size:0.75rem; color:var(--text2); margin-top:0.5rem;">Track progress and measure ROI with real-time insights.</p>
+        </div>
+        <div class="corporate-card glow-card" onclick="show404()">
+            <i class="fas fa-users-between"></i>
+            <h3>Live Group Mentorship</h3>
+            <p style="font-size:0.75rem; color:var(--text2); margin-top:0.5rem;">Dedicated experts for team-based learning sessions.</p>
+        </div>
+        <div class="corporate-card glow-card" onclick="show404()">
+            <i class="fas fa-certificate"></i>
+            <h3>Enterprise Certifications</h3>
+            <p style="font-size:0.75rem; color:var(--text2); margin-top:0.5rem;">Globally recognized credentials for your workforce.</p>
+        </div>
+    </div>
+</section>
 
 <!-- CTA SECTION -->
-<div class="cta-section"><h2>Ready to Transform Your Career?</h2><p>Start your first module for free — no credit card required.</p><div class="hero-actions" style="justify-content:center;margin-top:1rem"><button class="btn-prim" style="background:white;color:var(--primary)" onclick="show404()">Start Learning Free →</button></div></div>
+<div class="cta-section">
+    <div class="sec-label sr" style="justify-content: center;">Get Started</div>
+    <h2>Ready to Transform Your Career?</h2>
+    <div class="sec-topic sr">Join 2.5M+ learners and start your journey today — no commitment required.</div>
+    <p>Start your first module for free — no credit card required.</p>
+    <div class="hero-actions" style="justify-content:center;margin-top:1rem"><button class="btn-prim" style="background:white;color:var(--primary)" onclick="show404()">Start Learning Free →</button></div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -809,7 +949,7 @@ document.querySelectorAll('.stat-num').forEach(el => {
 });
 
 // OTHER CARDS ENTRANCE (unchanged)
-gsap.utils.toArray('.glow-card, .course-card, .subject-card, .instructor-card, .testimonial-card, .achievement-card, .feature-card').forEach((card, i) => {
+gsap.utils.toArray('.glow-card, .course-card, .subject-card, .instructor-card, .testimonial-card, .achievement-card, .feature-card, .event-card, .corporate-card').forEach((card, i) => {
     gsap.from(card, {
         scrollTrigger: { trigger: card, start: "top 90%", once: true, toggleActions: "play none none none" },
         opacity: 0,
@@ -820,8 +960,8 @@ gsap.utils.toArray('.glow-card, .course-card, .subject-card, .instructor-card, .
     });
 });
 
-// SECTION TITLES
-gsap.utils.toArray('.sec-title, .sec-label').forEach(el => {
+// SECTION TITLES & TOPICS
+gsap.utils.toArray('.sec-title, .sec-label, .sec-topic').forEach(el => {
     gsap.from(el, {
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
         opacity: 0,
