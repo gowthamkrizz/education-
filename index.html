@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
 }
 
-/* ENHANCED 3D ANIMATIONS */
+/* ENHANCED 3D ANIMATIONS (unchanged) */
 @keyframes float3d {
     0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
     50% { transform: translateY(-15px) rotateX(3deg) rotateY(3deg); }
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5 {
 }
 .float-3d { animation: float3d 4s ease-in-out infinite; }
 .float-3d-reverse { animation: float3dReverse 5s ease-in-out infinite; }
-.glow-card { transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+.glow-card { transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); will-change: transform; }
 .glow-card:hover { transform: translateY(-10px) rotateX(4deg) rotateY(4deg) scale(1.02); animation: glowPulse 0.6s ease-out; }
 .rotate-3d { animation: rotate3d 8s linear infinite; transform-style: preserve-3d; }
 
@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5 {
 .loading-text { color: var(--text3); font-size: .7rem; letter-spacing: .2em; font-weight: 500; text-transform: uppercase; }
 .preloader-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-/* 404 ERROR MODAL - ENHANCED 3D */
+/* 404 ERROR MODAL */
 .error-overlay {
     position: fixed;
     inset: 0;
@@ -236,19 +236,57 @@ nav.scrolled { background: rgba(10,14,26,0.98); border-bottom-color: var(--borde
 .btn-login:hover { background: rgba(245,158,11,.1); transform: translateY(-2px); }
 .btn-register { background: var(--accent); color: var(--bg); border: none; font-weight: 700; }
 .btn-register:hover { transform: translateY(-2px); background: var(--accent2); }
-.hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; z-index: 1100; }
-.hamburger span { width: 20px; height: 2px; background: var(--accent); transition: all .3s; }
-.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+/* ========== PROFESSIONAL HAMBURGER MENU WITH ANIMATIONS ========== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 1100;
+    background: rgba(79,70,229,0.1);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+.hamburger:hover {
+    background: rgba(245,158,11,0.2);
+    transform: scale(1.02);
+}
+.hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: var(--primary3);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--primary3);
+}
+
+/* PROFESSIONAL MOBILE MENU - enhanced with blur, smooth slide & refined styling */
 .mobile-menu {
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
-    background: var(--bg);
+    left: auto;
+    width: min(85%, 320px);
+    background: rgba(10,14,26,0.98);
+    backdrop-filter: blur(20px);
     z-index: 998;
     display: flex;
     flex-direction: column;
@@ -256,39 +294,90 @@ nav.scrolled { background: rgba(10,14,26,0.98); border-bottom-color: var(--borde
     justify-content: center;
     gap: 1rem;
     transform: translateX(100%);
-    transition: transform .4s cubic-bezier(.77,0,.175,1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     overflow-y: auto;
-    padding: 80px 20px 40px;
+    padding: 80px 24px 40px;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+    border-left: 1px solid var(--border);
+}
+/* Add a subtle overlay when menu is open */
+body.menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 997;
+    pointer-events: none;
 }
 body.menu-open { position: fixed; width: 100%; overflow-y: scroll; }
 .mobile-menu.open { transform: translateX(0); }
 .mobile-menu a { 
     font-family: 'Syne', sans-serif; 
-    font-size: 1.5rem; 
+    font-size: 1.4rem; 
     font-weight: 600; 
     color: var(--text); 
     text-decoration: none; 
     cursor: pointer; 
     opacity: 0; 
-    transform: translateX(50px); 
-    transition: all .3s;
-    padding: 8px 0;
+    transform: translateX(40px); 
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    padding: 10px 0;
     display: inline-block;
+    width: 100%;
+    text-align: center;
+    letter-spacing: -0.3px;
+    border-radius: 40px;
 }
-.mobile-menu.open a:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: .1s; }
-.mobile-menu.open a:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: .15s; }
-.mobile-menu.open a:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: .2s; }
-.mobile-menu.open a:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: .25s; }
-.mobile-menu.open a:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: .3s; }
-.mobile-menu.open a:nth-child(6) { opacity: 1; transform: translateX(0); transition-delay: .35s; }
-.mobile-menu a:hover { color: var(--accent); }
-.mobile-divider { width: 50px; height: 1px; background: var(--border); opacity: 0; margin: 15px 0; }
-.mobile-menu.open .mobile-divider { opacity: 1; transition-delay: .4s; }
-.mobile-auth { display: flex; gap: 1rem; opacity: 0; transform: translateY(20px); transition: all .3s; margin-top: 10px; }
-.mobile-menu.open .mobile-auth { opacity: 1; transform: translateY(0); transition-delay: .45s; }
-#mobile-home { color: var(--accent); }
+.mobile-menu a:hover {
+    color: var(--accent);
+    background: rgba(245,158,11,0.1);
+    transform: translateX(8px) scale(1.02);
+}
+.mobile-menu.open a:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+.mobile-menu.open a:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+.mobile-menu.open a:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+.mobile-menu.open a:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+.mobile-menu.open a:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.25s; }
+.mobile-menu.open a:nth-child(6) { opacity: 1; transform: translateX(0); transition-delay: 0.3s; }
+.mobile-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    margin: 15px 0;
+}
+.mobile-menu.open .mobile-divider { opacity: 1; transition-delay: 0.35s; transition: opacity 0.4s ease; }
+.mobile-auth {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    margin-top: 10px;
+}
+.mobile-menu.open .mobile-auth { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+#mobile-home { 
+    color: var(--accent);
+    background: rgba(245,158,11,0.08);
+}
+#mobile-home:hover {
+    background: rgba(245,158,11,0.2);
+}
+/* Refine buttons inside mobile menu */
+.mobile-auth .btn-login, 
+.mobile-auth .btn-register {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+    width: auto;
+    min-width: 100px;
+}
+/* ========== END HAMBURGER MENU IMPROVEMENTS ========== */
 
-/* HERO SECTION - ENHANCED 3D EFFECTS */
+/* HERO SECTION */
 .hero {
     min-height: 85vh;
     display: flex;
@@ -330,7 +419,6 @@ body.menu-open { position: fixed; width: 100%; overflow-y: scroll; }
 .btn-sec:hover { transform: translateY(-2px); border-color: var(--accent); }
 .hero-visual { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 280px; z-index: 1; animation: slideInFromRight 0.8s ease-out; }
 .hero-card { background: rgba(30,26,58,0.8); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; text-align: center; animation: float3d 4s ease-in-out infinite; }
-.hero-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: .8rem; }
 
 /* STATS BAR */
 .stats-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: center; width: 100%; }
@@ -340,13 +428,13 @@ body.menu-open { position: fixed; width: 100%; overflow-y: scroll; }
 .stat-num { font-family: 'Syne', sans-serif; font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 800; background: linear-gradient(135deg, var(--primary3), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
 .stat-label { color: var(--text3); font-size: .65rem; margin-top: .2rem; letter-spacing: .08em; text-transform: uppercase; }
 
-/* SECTION STYLES - REDUCED GAPS */
+/* SECTION STYLES */
 section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: hidden; }
 .sec-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: .5rem; display: flex; align-items: center; gap: 8px; }
 .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
 .sec-title { font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; color: var(--ivory); }
 
-/* GRIDS - REDUCED TOP MARGIN */
+/* GRIDS */
 .courses-grid, .subjects-grid, .instructors-grid, .testimonial-grid, .gallery-grid, .achievement-grid, .feature-grid {
     display: grid;
     gap: 1.2rem;
@@ -361,7 +449,7 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .achievement-grid { grid-template-columns: repeat(4, 1fr); }
 .feature-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 
-/* CARDS - ENHANCED 3D HOVER EFFECTS */
+/* CARDS */
 .course-card, .subject-card, .instructor-card, .testimonial-card, .gallery-item, .achievement-card, .feature-card {
     background: var(--surface);
     border: 1px solid var(--border2);
@@ -393,7 +481,7 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .feature-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; transition: transform 0.3s; }
 .feature-card:hover i { transform: scale(1.1); }
 
-/* GALLERY - ENHANCED WITH 3D EFFECTS & FIXED ANIMATIONS */
+/* GALLERY - SMOOTH & LAG-FREE (no continuous floating, only clean entrance) */
 .gallery-item {
     position: relative;
     aspect-ratio: 1;
@@ -401,8 +489,8 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
     overflow: hidden;
     cursor: pointer;
     background: var(--surface);
-    transform-style: preserve-3d;
     transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    will-change: transform;
 }
 .gallery-item:hover {
     transform: translateY(-15px) rotateX(6deg) rotateY(6deg) scale(1.03);
@@ -442,7 +530,7 @@ section.sec { padding: 2.5rem 5%; position: relative; width: 100%; overflow-x: h
 .partner-item { opacity: 0.7; transition: all 0.3s; font-size: 0.9rem; font-weight: 600; color: var(--text2); cursor: pointer; display: flex; align-items: center; gap: 6px; }
 .partner-item:hover { opacity: 1; color: var(--accent); transform: translateY(-3px) scale(1.05); }
 
-/* CTA - REDUCED PADDING */
+/* CTA */
 .cta-section { text-align: center; padding: 2.5rem 5%; background: linear-gradient(135deg, var(--primary), var(--primary2)); width: 100%; position: relative; overflow: hidden; }
 .cta-section::before { content: ''; position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent); top: -150px; right: -150px; animation: spinSlow 20s linear infinite; }
 .cta-section h2 { font-size: clamp(1.3rem, 5vw, 1.8rem); margin-bottom: 0.8rem; }
@@ -464,10 +552,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 .ft-col a:hover { color: var(--accent); transform: translateX(5px); }
 .ft-bot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding-top: 1.5rem; border-top: 1px solid var(--border2); font-size: .6rem; color: var(--text3); }
 
-/* GALLERY SECTION - REDUCED PADDING */
-.gallery-section { padding: 2.5rem 5%; }
-
-/* SCROLL REVEAL - ENHANCED */
+/* SCROLL REVEAL */
 .sr { opacity: 0; transform: translateY(25px); transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
 .sr.vis { opacity: 1; transform: translateY(0); }
 .d1 { transition-delay: .1s; }
@@ -506,6 +591,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     .gallery-overlay h3 { font-size: 0.9rem; }
     .gallery-overlay p { font-size: 0.65rem; }
     .mobile-menu a { font-size: 1.3rem; }
+    .mobile-menu { width: 85%; }
 }
 @media (max-width: 480px) {
     .hero-title { font-size: 1.5rem; }
@@ -531,7 +617,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     </div>
 </div>
 
-<!-- MOBILE MENU -->
+<!-- MOBILE MENU - enhanced professional area -->
 <div class="mobile-menu" id="mobileMenu">
     <div style="width: 100%; max-width: 280px; text-align: center;">
         <a href="#" id="mobile-home" onclick="event.preventDefault(); goToHomePageWithPreloader();">🏠 Home</a>
@@ -600,15 +686,15 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <div class="feature-card glow-card" onclick="show404()"><i class="fas fa-chalkboard-user"></i><h3>Live Mentorship</h3></div>
 <div class="feature-card glow-card" onclick="show404()"><i class="fas fa-download"></i><h3>Offline Access</h3></div></div></section>
 
-<!-- IMMERSIVE EDUCATION ENVIRONMENT - FIXED GALLERY ANIMATIONS -->
+<!-- IMMERSIVE EDUCATION ENVIRONMENT - SMOOTH GALLERY -->
 <div class="gallery-section" style="background:var(--bg3);">
     <div class="sec-label sr">Learning Experience</div>
     <h2 class="sec-title sr">Immersive <span style="color:var(--accent)">Education</span> Environment</h2>
     <div class="gallery-grid">
-        <div class="gallery-item glow-card gallery-animate" onclick="show404()"><img src=".//img/images (1).webp" alt="Online Learning" class="gallery-img"><div class="gallery-overlay"><i class="fas fa-laptop-code"></i><h3>Online Learning</h3><p>5000+ courses</p></div></div>
-        <div class="gallery-item glow-card gallery-animate" onclick="show404()"><img src=".//img/free_online_class.jpeg.webp" alt="Community" class="gallery-img"><div class="gallery-overlay"><i class="fas fa-users"></i><h3>Community</h3><p>2.5M+ learners</p></div></div>
-        <div class="gallery-item glow-card gallery-animate" onclick="show404()"><img src=".//img/images.webp" alt="Certified" class="gallery-img"><div class="gallery-overlay"><i class="fas fa-certificate"></i><h3>Certified</h3><p>Get certified</p></div></div>
-        <div class="gallery-item glow-card gallery-animate" onclick="show404()"><img src=".//img/open-online-courses-e1455753889686.webp" alt="Live Sessions" class="gallery-img"><div class="gallery-overlay"><i class="fas fa-chalkboard-user"></i><h3>Live Sessions</h3><p>Weekly classes</p></div></div>
+        <div class="gallery-item" onclick="show404()"><img src=".//img/images%20(1).webp" alt="Online Learning" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-laptop-code"></i><h3>Online Learning</h3><p>5000+ courses</p></div></div>
+        <div class="gallery-item" onclick="show404()"><img src=".//img/free_online_class.jpeg.webp" alt="Community" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-users"></i><h3>Community</h3><p>2.5M+ learners</p></div></div>
+        <div class="gallery-item" onclick="show404()"><img src=".//img/images.webp" alt="Certified" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-certificate"></i><h3>Certified</h3><p>Get certified</p></div></div>
+        <div class="gallery-item" onclick="show404()"><img src=".//img/open-online-courses-e1455753889686.webp" alt="Live Sessions" class="gallery-img" loading="lazy"><div class="gallery-overlay"><i class="fas fa-chalkboard-user"></i><h3>Live Sessions</h3><p>Weekly classes</p></div></div>
     </div>
 </div>
 
@@ -637,7 +723,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     <div class="ft-grid">
         <div class="ft-brand">
              <div class="ft-brand-name" onclick="goToHomePageWithPreloader()" style="cursor:pointer">
-                <img src=".//img/stackly .webp" alt="Stackly law" class="nav-logo-img"/>
+                <img src=".//img/stackly%20.webp" alt="Stackly law" class="nav-logo-img"/>
             </div>
             <p>Empowering careers through modern education. Join 2.5M+ learners worldwide.</p>
             <div class="ft-socials">
@@ -667,44 +753,33 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 // PRELOADER
 window.addEventListener('load', function() { setTimeout(function() { const p = document.getElementById('preloader'); p.classList.add('preloader-hidden'); setTimeout(() => p.style.display = 'none', 800); }, 2500); });
 
-// GSAP + SCROLLTRIGGER ENHANCED ANIMATIONS
 gsap.registerPlugin(ScrollTrigger);
 
-// Hero section parallax 3D effect
+// Hero parallax
 gsap.to(".hero-orb1", {
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 },
-    x: 50, y: 30, scale: 1.1, duration: 1, ease: "none"
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 },
+    x: 40, y: 20, scale: 1.05, duration: 1, ease: "none"
 });
 gsap.to(".hero-orb2", {
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 },
-    x: -40, y: -20, scale: 1.05, duration: 1, ease: "none"
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 },
+    x: -30, y: -15, scale: 1.03, duration: 1, ease: "none"
 });
 
-// GALLERY ITEMS - FIXED ANIMATIONS (entrance + continuous floating)
+// GALLERY - SMOOTH ENTRANCE ONLY (NO CONTINUOUS FLOATING, LAG-FIXED)
 const galleryItems = document.querySelectorAll('.gallery-item');
 galleryItems.forEach((item, index) => {
-    // Entrance animation with GSAP
     gsap.from(item, {
-        scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none reverse" },
+        scrollTrigger: { trigger: item, start: "top 90%", once: true, toggleActions: "play none none none" },
         opacity: 0,
-        y: 60,
-        rotationY: 25,
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: "back.out(0.5)"
-    });
-    // Continuous subtle floating animation
-    gsap.to(item, {
-        y: -8,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: index * 0.3
+        scale: 0.92,
+        duration: 0.65,
+        delay: index * 0.08,
+        ease: "back.out(0.3)",
+        clearProps: "all"
     });
 });
 
-// Animate stat numbers on scroll with GSAP
+// STATS COUNTER
 document.querySelectorAll('.stat-num').forEach(el => {
     let raw = el.innerText;
     let targetVal = parseInt(raw.replace(/[^0-9.]/g, ''));
@@ -720,7 +795,7 @@ document.querySelectorAll('.stat-num').forEach(el => {
         onEnter: () => {
             gsap.to(obj, {
                 count: targetVal,
-                duration: 2.2,
+                duration: 2,
                 ease: "power2.out",
                 onUpdate: () => {
                     if(raw === '24/7') el.innerText = '24/7';
@@ -733,31 +808,30 @@ document.querySelectorAll('.stat-num').forEach(el => {
     });
 });
 
-// Cards stagger fade-up animation
+// OTHER CARDS ENTRANCE (unchanged)
 gsap.utils.toArray('.glow-card, .course-card, .subject-card, .instructor-card, .testimonial-card, .achievement-card, .feature-card').forEach((card, i) => {
     gsap.from(card, {
-        scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" },
+        scrollTrigger: { trigger: card, start: "top 90%", once: true, toggleActions: "play none none none" },
         opacity: 0,
-        y: 50,
-        rotationX: 15,
-        duration: 0.7,
-        delay: i * 0.05,
-        ease: "back.out(0.6)"
+        y: 35,
+        duration: 0.6,
+        delay: i * 0.03,
+        ease: "power2.out"
     });
 });
 
-// Section titles fade up
+// SECTION TITLES
 gsap.utils.toArray('.sec-title, .sec-label').forEach(el => {
     gsap.from(el, {
-        scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
         opacity: 0,
-        y: 30,
-        duration: 0.8,
+        y: 25,
+        duration: 0.7,
         ease: "power3.out"
     });
 });
 
-// CTA pulse animation
+// CTA pulse
 gsap.to(".cta-section", {
     scrollTrigger: { trigger: ".cta-section", start: "top 80%", once: true },
     boxShadow: "0 0 30px rgba(245,158,11,0.5)",
@@ -766,23 +840,16 @@ gsap.to(".cta-section", {
     yoyo: true
 });
 
-// Floating elements continuous animation
+// Hero card floating (kept as is)
 gsap.to(".hero-card", {
-    y: -15,
+    y: -10,
     duration: 2.5,
     repeat: -1,
     yoyo: true,
     ease: "sine.inOut"
 });
-gsap.to(".hero-orb1", {
-    scale: 1.15,
-    duration: 4,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut"
-});
 
-// MAIN FUNCTION: GO TO HOME PAGE WITH PRELOADER
+// NAVIGATION FUNCTIONS
 function goToHomePageWithPreloader() {
     close404();
     closeMobileMenu();
@@ -808,7 +875,6 @@ function goToHomePageWithPreloader() {
     }
 }
 
-// PAGE NAVIGATION FUNCTIONS
 function show404() { 
     document.getElementById('errorOverlay').classList.add('active'); 
     document.body.style.overflow = 'hidden'; 
@@ -823,17 +889,14 @@ function close404() {
     document.body.style.overflow = ''; 
 }
 
-// ERROR MODAL CLOSE
 const errorHomeBtn = document.getElementById('errorHomeBtn');
 if(errorHomeBtn) errorHomeBtn.addEventListener('click', () => { close404(); goToHomePageWithPreloader(); });
 const errorOverlay = document.getElementById('errorOverlay');
 if(errorOverlay) errorOverlay.addEventListener('click', (e) => { if(e.target === errorOverlay) close404(); });
 
-// NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => { if(navbar) navbar.classList.toggle('scrolled', window.scrollY > 50); });
 
-// MOBILE MENU
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 let scrollPosition = 0;
@@ -854,7 +917,6 @@ function closeMobileMenu() {
 if(hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); });
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMobileMenu(); });
 
-// SCROLL REVEAL (fallback)
 let revealObs;
 function initReveal() {
     if(revealObs) revealObs.disconnect();
@@ -863,7 +925,6 @@ function initReveal() {
 }
 initReveal();
 
-// Refresh ScrollTrigger after all content loads
 window.addEventListener('load', () => {
     ScrollTrigger.refresh();
 });
